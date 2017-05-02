@@ -21,6 +21,7 @@ docker exec -it container-id /bin/bash
 
 #push
 docker push eltonkola/docker_filemanager
+docker push eltonkola/docker_filemanager:latest
 
 # read logs
 docker logs -f container-id
@@ -48,4 +49,3 @@ $ docker volume prune
 
 
 docker volume create demo_volume
-docker run -d -v demo_volume:/world demo_volume ls /world

@@ -18,5 +18,6 @@ sed -ri "s/^error_reporting\s*=.*$//g" /etc/php/7.0/apache2/php.ini
 sed -ri "s/^error_reporting\s*=.*$//g" /etc/php/7.0/cli/php.ini
 echo "error_reporting = $PHP_ERROR_REPORTING" >> /etc/php/7.0/apache2/php.ini
 echo "error_reporting = $PHP_ERROR_REPORTING" >> /etc/php/7.0/cli/php.ini
+chmod -R 775 /workingdir
 
 source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND
