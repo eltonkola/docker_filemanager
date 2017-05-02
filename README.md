@@ -46,3 +46,6 @@ $ docker volume rm $(docker volume ls -qf dangling=true)
 similar:
 $ docker volume prune
 
+
+docker volume create demo_volume
+docker run -d -v demo_volume:/world demo_volume ls /world
