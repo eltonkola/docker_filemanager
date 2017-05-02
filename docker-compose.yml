@@ -2,7 +2,7 @@ version: '2'
 services:
     file_manager:
         build: .
-        image: eltonkola/file_manager
+        image: eltonkola/docker_filemanager
         environment:
             PHP_ERROR_REPORTING : E_ALL & ~E_STRICT
             ADMIN : admin
