@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING:-"E_ALL"}
+ADMIN=${ADMIN:-"admin"}
+PASSWORD=${PASSWORD:-"admin"}
+
+#upload max size
+sed -ie 's/upload_max_filesize\ =\ 2M/upload_max_filesize\ =\ 200M/g' /etc/php/7.0/apache2/php.ini
+#file manager username and password
+sed -ie "s/app_admin/$ADMIN/g" /var/www/index.php
+sed -ie "s/app_password/$PASSWORD/g" /var/www/index.php
+#error logs
+sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php/7.0/apache2/php.ini
+sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php/7.0/cli/php.ini
+sed -ri "s/^error_reporting\s*=.*$//g" /etc/php/7.0/apache2/php.ini
+sed -ri "s/^error_reporting\s*=.*$//g" /etc/php/7.0/cli/php.ini
+echo "error_reporting = $PHP_ERROR_REPORTING" >> /etc/php/7.0/apache2/php.ini
+echo "error_reporting = $PHP_ERROR_REPORTING" >> /etc/php/7.0/cli/php.ini
+
+source /etc/apache2/envvars && exec /usr/sbin/apache2 -DFOREGROUND

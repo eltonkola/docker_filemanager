@@ -1,0 +1,14 @@
+version: '2'
+services:
+    file_manager:
+        build: .
+        image: eltonkola/file_manager
+        environment:
+            PHP_ERROR_REPORTING : E_ALL & ~E_STRICT
+            ADMIN : admin
+            PASSWORD : password
+        tty: true
+        ports:
+            - "85:80"
+        volumes:         
+            - ./workingdir:/workingdir
